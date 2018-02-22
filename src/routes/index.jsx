@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
+
+import * as routes from '../constants/routes';
+
+import User from 'routes/User';
 
 class Routes extends Component {
   render() {
     return (
-      <div>
-        <h1 className="f1">routes go here</h1>
-      </div>
+      <Switch>
+        <Route exact path={routes.USER_ROUTE} component={User} />
+      </Switch>
     );
   }
 }
