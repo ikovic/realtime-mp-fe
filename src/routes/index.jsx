@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import LandingPage from 'routes/LandingPage';
+import * as routes from 'config/routes';
 
 class Routes extends Component {
   render() {
     return (
-      <div>
-        <h1 className="f1">routes go here</h1>
-      </div>
+      <Switch>
+        <Route to={routes.LOGIN} component={LandingPage} />
+      </Switch>
     );
   }
 }
