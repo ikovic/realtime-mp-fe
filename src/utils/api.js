@@ -1,12 +1,12 @@
-import axios from "axios";
-import { BASE_URL } from "config/";
+import axios from 'axios';
+import { BASE_URL } from 'config/';
 
 const instance = axios.create();
 
 instance.interceptors.request.use(
   config => {
-    const token = localStorage.getItem("token");
-    const activeService = localStorage.getItem("service");
+    const token = localStorage.getItem('token');
+    const activeService = localStorage.getItem('service');
 
     config.headers.Authorization = `Bearer ${token}`;
     config.headers.Service = activeService;
@@ -14,12 +14,8 @@ instance.interceptors.request.use(
     return config;
   },
   error => {
-    console.log("interceptor error");
-  }
+    console.log('interceptor error', error);
+  },
 );
 
-const loginUser = () => instance.post(`${BASE_URL}/api/login`);
-
-export default {
-  loginUser
-};
+export const loginUser = () => instance.post(`${BASE_URL}/api/login`);
