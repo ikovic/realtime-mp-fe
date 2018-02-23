@@ -1,7 +1,7 @@
 const initialState = {};
 
-export const loginUser = userData => async dispatch => {
-  console.log('lu', userData);
+export const loginUser = (service, userData) => async dispatch => {
+  console.log("lu", service, userData);
 };
 
 const userReducer = (state = initialState, action) => {

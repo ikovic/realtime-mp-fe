@@ -1,12 +1,14 @@
-import React from 'react';
-import GoogleLoginComponent from 'react-google-login';
+import React from "react";
+import GoogleLoginComponent from "react-google-login";
+import { GOOGLE_ID } from "config/auth";
 
-const GoogleLogin = ({ onSuccess, onFailure }) => {
+const GoogleLogin = ({ onSuccess, onFailure, className }) => {
   return (
     <GoogleLoginComponent
-      clientId="723860365140-n84h96s612vhcf25tf7ic25q7cnnb8fb.apps.googleusercontent.com"
+      clientId={GOOGLE_ID}
       onSuccess={onSuccess}
       onFailure={onFailure}
+      className={className}
     />
   );
 };

@@ -1,23 +1,10 @@
-import React, { Component } from 'react';
-import GoogleLogin from 'routes/LandingPage/components/GoogleLogin';
-import FacebookLogin from 'routes/LandingPage/components/FacebookLogin';
+import React from "react";
+import Authentication from "routes/LandingPage/containers/Authentication";
 
-class LandingPage extends Component {
-  onSuccess = response => {
-    console.log('success', response);
-  };
-
-  onFailure = response => {
-    console.log('failure', response);
-  };
-  render() {
-    return (
-      <div>
-        <GoogleLogin onSuccess={this.onSuccess} onFailure={this.onFailure} />
-        <FacebookLogin />
-      </div>
-    );
-  }
-}
+const LandingPage = props => (
+  <div className="vh-100 dt w-100">
+    <Authentication />
+  </div>
+);
 
 export default LandingPage;

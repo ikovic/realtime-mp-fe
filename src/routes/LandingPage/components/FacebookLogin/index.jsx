@@ -1,15 +1,15 @@
-import React from 'react';
-import FacebookLoginComponent from 'react-facebook-login';
+import React from "react";
+import FacebookLoginComponent from "react-facebook-login";
+import { FACEBOOK_ID } from "config/auth";
 
-const response = res => console.log('f', res);
-
-const FacebookLogin = props => {
+const FacebookLogin = ({ onSuccess, onFailure, className }) => {
   return (
     <FacebookLoginComponent
-      appId="213243595893523"
-      autoLoad={true}
+      cssClass={className}
+      appId={FACEBOOK_ID}
+      autoLoad={false}
       fields="name, email, picture"
-      callback={response}
+      callback={res => (res.accessToken ? onSuccess(res) : onFailure(res))}
     />
   );
 };
