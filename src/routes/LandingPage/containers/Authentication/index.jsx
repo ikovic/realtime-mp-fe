@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as userActions from "reducers/user";
+import * as authActions from "reducers/auth";
 import GoogleLogin from "routes/LandingPage/components/GoogleLogin";
 import FacebookLogin from "routes/LandingPage/components/FacebookLogin";
 import AuthButton from "routes/LandingPage/components/AuthButton";
@@ -36,7 +36,7 @@ class Authentication extends Component {
 
 const mapDispatchToProps = dispatch => ({
   loginUser: (service, userData) =>
-    dispatch(userActions.loginUser(service, userData))
+    dispatch(authActions.loginUser(service, userData))
 });
 
 export default connect(null, mapDispatchToProps)(Authentication);
