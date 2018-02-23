@@ -14,12 +14,11 @@ const initialState = {
   error: null,
 };
 
-export const edit = user => dispatch => {
+export const editUser = user => dispatch => {
   return dispatch({ type: EDIT_USER_SUCCESS, user });
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case EDIT_USER:
       return {

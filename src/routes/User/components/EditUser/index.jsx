@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import edit from 'reducers/user';
+import { editUser } from 'reducers/user';
 
 const emptyUser = {
   fullName: '',
@@ -24,13 +24,10 @@ class EditProfile extends Component {
     this.setState({ user: { ...this.state.user, [key]: value } });
   };
 
-  handleSave = event => {
-    this.props.save(this.state.user);
-  }
-
   render() {
     const { user } = this.state;
     const { fullName, nickname, avatar } = user;
+    const { save } = this.props;    
 
     return (
       <div>
@@ -66,7 +63,7 @@ class EditProfile extends Component {
               />
             </div>
             <div className="flex justify-end pa3">
-              <button className="f6 link dim ba ph3 pv2 mb2 dib black" onClick={this.handleSave}>
+              <button className="f6 link dim ba ph3 pv2 mb2 dib black" onClick={() => save(user)}>
                 Save
               </button>
             </div>
@@ -82,7 +79,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  save: user => dispatch(edit(user)),
+  save: user => dispatch(editUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
