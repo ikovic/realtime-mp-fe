@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import * as routes from '../constants/routes';
+import * as routes from 'config/routes';
 
 import User from 'routes/User';
 
