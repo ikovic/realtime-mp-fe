@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { editUser } from 'reducers/user';
+import * as userActions from 'reducers/user';
 
 const emptyUser = {
   fullName: '',
@@ -79,7 +79,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  save: user => dispatch(editUser(user)),
+  save: user => dispatch(userActions.editUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
