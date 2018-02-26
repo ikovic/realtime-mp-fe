@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { BASE_URL } from 'config/';
 
 const instance = axios.create();
 
@@ -18,4 +17,4 @@ instance.interceptors.request.use(
   },
 );
 
-export const loginUser = () => instance.post(`${BASE_URL}/api/login`);
+export default instance;

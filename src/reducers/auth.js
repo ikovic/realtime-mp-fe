@@ -1,38 +1,41 @@
 import api from 'utils/api';
+import BASE_URL from 'config/urls';
 
-const LOGIN_START = 'rmp/users/LOGIN_START';
-const LOGIN_SUCCESS = 'rmp/users/LOGIN_SUCCESS';
-const LOGIN_FAILURE = 'rmp/users/LOGIN_FAILURE';
+const LOGIN = 'rmp/auth/LOGIN';
+const LOGIN_SUCCESS = 'rmp/auth/LOGIN_SUCCESS';
+const LOGIN_FAILURE = 'rmp/auth/LOGIN_FAILURE';
 
 const initialState = {
   isLoggedIn: false,
-  isLoggingIn: false,
-  error: '',
+  logInInProgress: false,
+  error: {},
 };
 
 export const loginUser = (service, userData) => async dispatch => {
-  dispatch({ type: LOGIN_START });
+  dispatch({ type: LOGIN });
   try {
+    console.log(userData);
     localStorage.setItem('token', userData.accessToken);
     localStorage.setItem('service', service);
 
-    await api.loginUser();
+    await api.post(`${BASE_URL}/api/login`);
 
     dispatch({ type: LOGIN_SUCCESS });
   } catch (error) {
     localStorage.clear();
-    dispatch({ type: LOGIN_FAILURE, message: error.message });
+
+    dispatch({ type: LOGIN_FAILURE, error });
   }
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_START:
-      return { ...state, isLoggingIn: true };
+    case LOGIN:
+      return { ...state, logInInProgress: true };
     case LOGIN_SUCCESS:
-      return { ...state, isLoggedIn: true, isLoggingIn: false };
+      return { ...state, isLoggedIn: true, logInInProgress: false };
     case LOGIN_FAILURE:
-      return { ...state, isLoggedIn: false, isLoggingIn: false, error: action.error };
+      return { ...state, isLoggedIn: false, logInInProgress: false, error: action.error };
     default:
       return state;
   }
