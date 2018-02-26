@@ -27,7 +27,7 @@ class EditProfile extends Component {
   render() {
     const { user } = this.state;
     const { fullName, nickname, avatar } = user;
-    const { save } = this.props;    
+    const { save } = this.props;
 
     return (
       <div>
