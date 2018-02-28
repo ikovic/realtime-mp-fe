@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as authActions from 'reducers/auth';
-import GoogleLogin from 'routes/LandingPage/components/GoogleLogin';
-import FacebookLogin from 'routes/LandingPage/components/FacebookLogin';
-import AuthButton from 'routes/LandingPage/components/AuthButton';
 
 class Authentication extends Component {
-  onSuccess = service => response => {
-    this.props.loginUser(service, response);
-  };
+  constructor(props) {
+    super(props);
 
-  onFailure = response => {
-    console.log('failure', response);
-  };
+    const query = new URLSearchParams(props.location.search);
+    const token = query.get('token');
+    if (token) {
+      this.props.loginUser(token);
+    }
+  }
 
   render() {
     return (
       <div className="center v-mid dtc tc bg-light-red">
-        <AuthButton
-          component={GoogleLogin}
-          onSuccess={this.onSuccess('google')}
-          onFailure={this.onFailure}
-        />
-        <AuthButton
-          component={FacebookLogin}
-          onSuccess={this.onSuccess('facebook')}
-          onFailure={this.onFailure}
-        />
+        <a
+          className="h3 f6 dim ph3 pv2 mb5 dib bg-lightest-blue pointer black no-underline"
+          href="/auth/facebook"
+        >
+          Login with Facebook
+        </a>
+        <a
+          className="h3 f6 dim ph3 pv2 mb5 dib bg-lightest-blue pointer black no-underline"
+          href="/auth/facebook"
+        >
+          Login with Facebook
+        </a>
       </div>
     );
   }
