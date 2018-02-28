@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as authActions from 'reducers/auth';
+import { BACKEND_URL } from 'config/urls';
 
 class Authentication extends Component {
-  constructor(props) {
-    super(props);
-
-    const query = new URLSearchParams(props.location.search);
-    const token = query.get('token');
-    if (token) {
-      this.props.loginUser(token);
-    }
-  }
-
   render() {
     return (
       <div className="center v-mid dtc tc bg-light-red">
         <a
           className="h3 f6 dim ph3 pv2 mb5 dib bg-lightest-blue pointer black no-underline"
-          href="/auth/facebook"
+          href={`${BACKEND_URL}/auth/facebook`}
         >
           Login with Facebook
         </a>
         <a
           className="h3 f6 dim ph3 pv2 mb5 dib bg-lightest-blue pointer black no-underline"
-          href="/auth/facebook"
+          href={`${BACKEND_URL}/auth/facebook`}
         >
           Login with Facebook
         </a>
@@ -34,7 +25,7 @@ class Authentication extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  loginUser: (service, userData) => dispatch(authActions.loginUser(service, userData)),
+  loginSuccess: (service, userData) => dispatch(authActions.loginSuccess(service, userData)),
 });
 
 export default connect(null, mapDispatchToProps)(Authentication);

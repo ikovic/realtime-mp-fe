@@ -1,0 +1,14 @@
+{
+  "extends": "react-app",
+  "ecmaFeatures": {
+    "modules": true,
+    "jsx": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module"
+  },
+  "rules": {
+    "jsx-a11y/href-no-hash": "off"
+  }
+}

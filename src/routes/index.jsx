@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import LandingPage from 'routes/LandingPage';
 import User from 'routes/User';
+import Callback from 'routes/Callback';
 import * as routes from 'config/routes';
 
 class Routes extends Component {
@@ -9,7 +10,8 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path={routes.LOGIN} component={LandingPage} />
-        <Route exact path={routes.USER_ROUTE} component={User} />
+        <Route exact path={routes.USER} component={User} />
+        <Route exact path={routes.CALLBACK} component={Callback} />
       </Switch>
     );
   }
