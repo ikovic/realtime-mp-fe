@@ -15,9 +15,9 @@ class Authentication extends Component {
         </a>
         <a
           className="h3 f6 dim ph3 pv2 mb5 dib bg-lightest-blue pointer black no-underline"
-          href={`${BACKEND_URL}/auth/facebook`}
+          href={`${BACKEND_URL}/auth/google`}
         >
-          Login with Facebook
+          Login with Google
         </a>
       </div>
     );
