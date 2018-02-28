@@ -1,37 +1,27 @@
-import api from 'utils/api';
-import BASE_URL from 'config/urls';
-
-const LOGIN = 'rmp/auth/LOGIN';
 const LOGIN_SUCCESS = 'rmp/auth/LOGIN_SUCCESS';
 const LOGIN_FAILURE = 'rmp/auth/LOGIN_FAILURE';
+const LOG_OUT = 'rmp/auth/LOG_OUT';
 
 const initialState = {
   isLoggedIn: false,
   logInInProgress: false,
-  error: {},
+  error: null,
 };
 
-export const loginUser = (service, userData) => async dispatch => {
-  dispatch({ type: LOGIN });
-  try {
-    console.log(userData);
-    localStorage.setItem('token', userData.accessToken);
-    localStorage.setItem('service', service);
+export const loginSuccess = token => dispatch => {
+  localStorage.setItem('token', token);
 
-    await api.post(`${BASE_URL}/api/login`);
-
-    dispatch({ type: LOGIN_SUCCESS });
-  } catch (error) {
-    localStorage.clear();
-
-    dispatch({ type: LOGIN_FAILURE, error });
-  }
+  dispatch({ type: LOGIN_SUCCESS });
 };
 
-const userReducer = (state = initialState, action) => {
+export const logOut = () => dispatch => {
+  localStorage.clear();
+
+  dispatch({ type: LOG_OUT });
+};
+
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN:
-      return { ...state, logInInProgress: true };
     case LOGIN_SUCCESS:
       return { ...state, isLoggedIn: true, logInInProgress: false };
     case LOGIN_FAILURE:
@@ -41,4 +31,4 @@ const userReducer = (state = initialState, action) => {
   }
 };
 
-export default userReducer;
+export default authReducer;

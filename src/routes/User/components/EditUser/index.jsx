@@ -19,8 +19,8 @@ class EditProfile extends Component {
   }
 
   handleChange = event => {
-    const key = event.target.name;
-    const value = event.target.value;
+    const { name: key, value } = event.target;
+
     this.setState({ user: { ...this.state.user, [key]: value } });
   };
 

@@ -1,39 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as authActions from 'reducers/auth';
-import GoogleLogin from 'routes/LandingPage/components/GoogleLogin';
-import FacebookLogin from 'routes/LandingPage/components/FacebookLogin';
-import AuthButton from 'routes/LandingPage/components/AuthButton';
+import { BACKEND_URL } from 'config/urls';
 
 class Authentication extends Component {
-  onSuccess = service => response => {
-    this.props.loginUser(service, response);
-  };
-
-  onFailure = response => {
-    console.log('failure', response);
-  };
-
   render() {
     return (
       <div className="center v-mid dtc tc bg-light-red">
-        <AuthButton
-          component={GoogleLogin}
-          onSuccess={this.onSuccess('google')}
-          onFailure={this.onFailure}
-        />
-        <AuthButton
-          component={FacebookLogin}
-          onSuccess={this.onSuccess('facebook')}
-          onFailure={this.onFailure}
-        />
+        <a
+          className="h3 f6 dim ph3 pv2 mb5 dib bg-lightest-blue pointer black no-underline"
+          href={`${BACKEND_URL}/auth/facebook`}
+        >
+          Login with Facebook
+        </a>
+        <a
+          className="h3 f6 dim ph3 pv2 mb5 dib bg-lightest-blue pointer black no-underline"
+          href={`${BACKEND_URL}/auth/facebook`}
+        >
+          Login with Facebook
+        </a>
       </div>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  loginUser: (service, userData) => dispatch(authActions.loginUser(service, userData)),
+  loginSuccess: (service, userData) => dispatch(authActions.loginSuccess(service, userData)),
 });
 
 export default connect(null, mapDispatchToProps)(Authentication);

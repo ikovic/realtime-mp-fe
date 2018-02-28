@@ -1,2 +1,3 @@
 export const LOGIN = '/login';
-export const USER_ROUTE = '/user';
+export const USER = '/user';
+export const CALLBACK = '/callback';
