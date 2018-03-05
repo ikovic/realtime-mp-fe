@@ -1,3 +1,6 @@
+import api from '../utils/api';
+import { BACKEND_URL } from '../config/urls';
+
 const PUT_LOBBIES = 'rmp/lobbies/PUT_LOBBIES';
 const FETCH_ERROR = 'rmp/lobbies/FETCH_ERROR';
 
@@ -6,36 +9,12 @@ const initialState = {
   error: null,
 };
 
-export const fetchLobbies = () => dispatch => {
+export const fetchLobbies = () => async dispatch => {
   try {
+    const { data: lobbies } = await api.get(`${BACKEND_URL}/lobbies`);
     dispatch({
       type: PUT_LOBBIES,
-      lobbies: [
-        {
-          id: 1,
-          name: 'xtreme lobby',
-          players: 0,
-          maxPlayers: 5,
-        },
-        {
-          id: 2,
-          name: 'huge lobby',
-          players: 2,
-          maxPlayers: 120,
-        },
-        {
-          id: 3,
-          name: 'pls join my lobby',
-          players: 1,
-          maxPlayers: 5,
-        },
-        {
-          id: 4,
-          name: 'we r full',
-          players: 7,
-          maxPlayers: 7,
-        },
-      ],
+      lobbies,
     });
   } catch (error) {
     dispatch({ type: FETCH_ERROR, payload: error });
