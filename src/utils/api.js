@@ -7,7 +7,7 @@ instance.interceptors.request.use(
     const token = localStorage.getItem('token');
     const activeService = localStorage.getItem('service');
 
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = token;
     config.headers.Service = activeService;
 
     return config;

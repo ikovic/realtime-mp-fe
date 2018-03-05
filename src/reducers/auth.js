@@ -1,3 +1,6 @@
+import api from 'utils/api';
+import { BACKEND_URL } from 'config/urls';
+
 const LOGIN_SUCCESS = 'rmp/auth/LOGIN_SUCCESS';
 const LOGIN_FAILURE = 'rmp/auth/LOGIN_FAILURE';
 const LOG_OUT = 'rmp/auth/LOG_OUT';
@@ -14,10 +17,13 @@ export const loginSuccess = token => dispatch => {
   dispatch({ type: LOGIN_SUCCESS });
 };
 
-export const logOut = () => dispatch => {
-  localStorage.clear();
-
-  dispatch({ type: LOG_OUT });
+export const logoutUser = () => async dispatch => {
+  try {
+    await api.post(`${BACKEND_URL}/auth/logout`);
+  } finally {
+    localStorage.clear();
+    dispatch({ type: LOG_OUT });
+  }
 };
 
 const authReducer = (state = initialState, action) => {
@@ -26,6 +32,8 @@ const authReducer = (state = initialState, action) => {
       return { ...state, isLoggedIn: true, logInInProgress: false };
     case LOGIN_FAILURE:
       return { ...state, isLoggedIn: false, logInInProgress: false, error: action.error };
+    case LOG_OUT:
+      return { ...state, isLoggedIn: false };
     default:
       return state;
   }
